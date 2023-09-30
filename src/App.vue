@@ -3,15 +3,24 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-    </nav>
-  </header>
-
-  <RouterView />
+  <v-layout>
+    <GmPartialNavigation />
+    <v-main class="d-flex">
+      <RouterView />
+    </v-main>
+  </v-layout>
 </template>
 
-<style lang="scss" scoped>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import GmPartialNavigation from '@/components/GmPartialNavigation.vue';
+
+export default defineComponent({
+  components: {
+    GmPartialNavigation,
+  }
+});
+</script>
+
+<style lang="scss">
 </style>
