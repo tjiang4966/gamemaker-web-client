@@ -10,6 +10,9 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list-item link prepend-icon="mdi-view-dashboard">
+        <RouterLink to="/profile" class="gm-nav-router-link">Profile</RouterLink>
+      </v-list-item>
+      <v-list-item link prepend-icon="mdi-view-dashboard">
         <RouterLink to="/about" class="gm-nav-router-link">About</RouterLink>
       </v-list-item>
     </v-list>
