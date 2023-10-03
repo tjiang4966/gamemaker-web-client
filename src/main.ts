@@ -21,6 +21,8 @@ import colors from 'vuetify/lib/util/colors';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
+import '@/styles/vue-datetime-picker.scss';
+
 const vuetify = createVuetify({
   components: {
     ...components,
