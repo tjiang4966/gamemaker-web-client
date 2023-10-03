@@ -22,6 +22,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 import '@/styles/vue-datetime-picker.scss';
+import type { IUser } from './shared/interfaces/IUser'
 
 const vuetify = createVuetify({
   components: {
@@ -45,5 +46,9 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 app.component('VueDatePicker', VueDatePicker);
+
+app.config.globalProperties.$GmGlobals = {
+  currentUser: {} as IUser,
+};
 
 app.mount('#gmApp')

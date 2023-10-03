@@ -14,10 +14,18 @@ import { RouterLink, RouterView } from 'vue-router'
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GmPartialNavigation from '@/components/GmPartialNavigation.vue';
+import { userStore } from './stores/user';
+import { mapStores } from 'pinia';
 
 export default defineComponent({
   components: {
     GmPartialNavigation,
+  },
+  computed: {
+    ...mapStores(userStore),
+  },
+  mounted() {
+    this.userStore.getCurrentUser();
   }
 });
 </script>

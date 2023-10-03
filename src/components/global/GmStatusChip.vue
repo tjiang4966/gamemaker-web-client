@@ -2,6 +2,7 @@
   <v-chip
     v-if="statustext"
     :class="`${chipStatusClass}`"
+    class="text-caption"
   >
     {{ statustext }}
   </v-chip>

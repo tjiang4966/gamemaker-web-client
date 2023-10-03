@@ -7,29 +7,10 @@
           :key="game.id"
           cols="12"
           sm="6"
-          md="3"
+          md="4"
+          lg="3"
         >
-          <v-card>
-            <template #title>
-              <div class="d-flex flex-column align-start">
-                <div class="mr-2 text-h5 w-100 text-truncate">
-                  {{ game.name }} xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                </div>
-                <GmStatusChip class="mt-2" :status="game.status" />
-              </div>
-            </template>
-            <template #text>
-              <div class="py-2">
-                Registration Due: {{ dayjs(game.registerDueDate).format('DD/MM/YYYY HH:mm') }}
-              </div>
-              <div class="py-2">
-                Game Start: {{ dayjs(game.gameStart).format('DD/MM/YYYY HH:mm') }}
-              </div>
-              <div class="py-2">
-                Game End: {{ dayjs(game.gameEnd).format('DD/MM/YYYY HH:mm') }}
-              </div>
-            </template>
-          </v-card>
+          <GmPartialGameCard :game="game" />
         </v-col>
       </v-row>
     </div>
@@ -39,12 +20,12 @@
 import { defineComponent } from 'vue';
 import { mapStores } from 'pinia';
 import { gameStore } from '@/stores/game';
-import GmStatusChip from '@/components/global/GmStatusChip.vue';
+import GmPartialGameCard from '@/components/GmPartialGameCard.vue';
 import dayjs from 'dayjs';
 
 export default defineComponent({
   components: {
-    GmStatusChip
+    GmPartialGameCard
   },
   data: () => ({
     isLoading: false as boolean,
