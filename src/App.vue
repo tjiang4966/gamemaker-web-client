@@ -1,10 +1,7 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <v-layout>
-    <GmPartialNavigation />
+    <GmPartialAppBar @nav-toggle="toggleNavigation"/>
+    <GmPartialNavigation ref="navDrawer"/>
     <v-main class="d-flex">
       <RouterView />
     </v-main>
@@ -13,20 +10,33 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { RouterView } from 'vue-router'
 import GmPartialNavigation from '@/components/GmPartialNavigation.vue';
+import GmPartialAppBar from './components/GmPartialAppBar.vue';
 import { userStore } from './stores/user';
 import { mapStores } from 'pinia';
 
 export default defineComponent({
   components: {
+    RouterView,
+    GmPartialAppBar,
     GmPartialNavigation,
   },
+  data: () => ({
+    showNavigation: true as boolean,
+  }),
   computed: {
     ...mapStores(userStore),
   },
-  mounted() {
-    this.userStore.getCurrentUser();
-  }
+  // mounted() {
+  //   this.userStore.getCurrentUser();
+  // },
+  methods: {
+    toggleNavigation() {
+      console.log('toggle nav');
+      (this.$refs.navDrawer as typeof GmPartialNavigation).showNav = !(this.$refs.navDrawer as typeof GmPartialNavigation).showNav;
+    }
+  },
 });
 </script>
 

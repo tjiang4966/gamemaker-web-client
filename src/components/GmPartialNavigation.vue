@@ -1,23 +1,13 @@
 <template>
   <v-navigation-drawer
-    class="gm-partial-navigation"
-    color="green-lighten-2"
+    v-model="showNav"
+    class="gm-partial-navigation bg-green"
+    color="bg-green"
   >
     <v-list>
-      <v-list-item>
-        <div class="text-h6">Gamemaker</div>
-        <div class="text-subtitle-2">Go London Great Wall Go</div>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list-item link prepend-icon="mdi-view-dashboard">
-        <RouterLink to="/profile" class="gm-nav-router-link">Profile</RouterLink>
-      </v-list-item>
-      <v-list-item link prepend-icon="mdi-view-dashboard">
-        <RouterLink to="/games" class="gm-nav-router-link">Game Management</RouterLink>
-      </v-list-item>
-      <v-list-item link prepend-icon="mdi-view-dashboard">
-        <RouterLink to="/about" class="gm-nav-router-link">About</RouterLink>
-      </v-list-item>
+      <GmRouterLink to="/profile" title="Profile" prepend-icon="mdi-view-dashboard"/>
+      <GmRouterLink to="/games" title="Game Management" prepend-icon="mdi-view-dashboard"/>
+      <GmRouterLink to="/about" title="About" prepend-icon="mdi-view-dashboard"/>
     </v-list>
     <template v-slot:append>
       <div class="pa-2">
@@ -34,11 +24,19 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GmPartialGoogleLoginButton from './GmPartialGoogleLoginButton.vue';
+import GmRouterLink from './global/GmRouterLink.vue';
 
 export default defineComponent({
   components: {
+    GmRouterLink,
     GmPartialGoogleLoginButton,
-  }
+  },
+  data: () => ({
+    showNav: true as boolean
+  }),
+  expose: [
+    'showNav'
+  ],
 })
 </script>
 <style lang="scss">
