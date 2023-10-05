@@ -13,20 +13,20 @@
       <v-row class="text-body-1">
         <v-col class="d-flex flex-column" cols="12">
           <div class="d-flex flex-column">
-            <div class="text-body-2"><v-icon icon="mdi-map-marker" class="text-green"></v-icon>Location</div>
+            <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-map-marker" class="text-green"></v-icon>Location</div>
             <div class="pl-5">{{ game.location }}</div>
           </div>
         </v-col>
         <v-col class="d-flex flex-column" cols="12" lg="6">
           <div class="d-flex flex-column">
-            <div class="text-body-2"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Game Date</div>
-            <div class="pl-5">{{ dayjs(game.gameStart).format('MMM D, YY HH:mm') }}</div>
+            <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Game Date</div>
+            <div class="pl-5">{{ dayjs(game.gameStart).format('MMM D, h:mma') }}</div>
           </div>
         </v-col>
         <v-col v-if="game.status === 'registing'" class="d-flex flex-column" cols="12" lg="6">
           <div class="d-flex flex-column">
-            <div class="text-body-2"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Registration Due</div>
-            <div class="pl-5">{{ dayjs(game.registerDueDate).format('MMM D, YY') }}</div>
+            <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Registration Due</div>
+            <div class="pl-5">{{ dayjs(game.regDueDate).format('MMM D, h:mma') }}</div>
           </div>
         </v-col>
       </v-row>
@@ -47,20 +47,20 @@
             <!-- More Game Data -->
             <v-row class="d-flex flex-row">
               <v-col class="d-flex flex-column" cols="6">
-                <div class="text-body-2"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Game End</div>
-                <div class="pl-5">{{ dayjs(game.gameEnd).format('MMM D, YY') }}</div>
+                <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-calendar" class="text-green"></v-icon>Game End</div>
+                <div class="pl-5">{{ dayjs(game.gameEnd).format('MMM D, h:mma') }}</div>
               </v-col>
               <v-col class="d-flex flex-column" cols="6">
-                <div class="text-body-2"><v-icon icon="mdi-clock" class="text-green"></v-icon>Duration</div>
+                <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-clock" class="text-green"></v-icon>Duration</div>
                 <div class="pl-5">{{ gameDuration }}</div>
               </v-col>
               <v-col class="d-flex flex-column" cols="6">
-                <div class="text-body-2"><v-icon icon="mdi-cash" class="text-green"></v-icon>Registration Fee</div>
+                <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-cash" class="text-green"></v-icon>Registration Fee</div>
                 <div class="pl-5">{{ `$${game.price}` }}</div>
               </v-col>
               <v-col class="d-flex flex-column" cols="6">
-                <div class="text-body-2"><v-icon icon="mdi-account-group" class="text-green"></v-icon>Capacity</div>
-                <div class="pl-5">{{ game.spots }}</div>
+                <div class="text-body-2 text-no-wrap text-truncate"><v-icon icon="mdi-account-group" class="text-green"></v-icon>Capacity</div>
+                <div class="pl-5">{{ game.capacity }}</div>
               </v-col>
             </v-row>
             <!-- Game Description -->

@@ -20,9 +20,15 @@ import colors from 'vuetify/lib/util/colors';
 // Vue Datepicker
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
 import '@/styles/vue-datetime-picker.scss';
-import type { IUser } from './shared/interfaces/IUser'
+
+// FormKit
+import { plugin, defaultConfig } from '@formkit/vue'
+import '@formkit/themes/genesis'
+
+// formkit rules
+import { integer } from '@/shared/helpers/formkitRuls'
+
 
 const vuetify = createVuetify({
   components: {
@@ -45,6 +51,11 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
+app.use(plugin, defaultConfig({
+  rules: {
+    integer,
+  },
+}))
 app.component('VueDatePicker', VueDatePicker);
 
 app.mount('#gmApp')

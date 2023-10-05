@@ -38,9 +38,9 @@
           >
             <v-text-field
               prepend-inner-icon="mdi-account-group"
-              label="Available Spots*"
-              v-model="newGame.spots"
-              :error-messages="v$.newGame.spots.$errors[0]?.$message"
+              label="Capacity*"
+              v-model="newGame.capacity"
+              :error-messages="v$.newGame.capacity.$errors[0]?.$message"
               :min="0"
               type="number"
               required
@@ -52,10 +52,10 @@
             md="4"
           >
             <GmFormField
-              :error-message="v$.newGame.registerDueDate.$errors[0]?.$message"
+              :error-message="v$.newGame.regDueDate.$errors[0]?.$message"
             >
               <label for="rdd-date-picker">Register Due Date*</label>
-              <VueDatePicker id="rdd-date-picker" v-model="newGame.registerDueDate" :min-date="new Date()"></VueDatePicker>
+              <VueDatePicker id="rdd-date-picker" v-model="newGame.regDueDate" :min-date="new Date()"></VueDatePicker>
             </GmFormField>
           </v-col>
           <v-col
@@ -67,7 +67,7 @@
               :error-message="v$.newGame.gameStart.$errors[0]?.$message"
             >
               <label for="gs-date-picker">Game Start Time*</label>
-              <VueDatePicker id="gs-date-picker" v-model="newGame.gameStart" :min-date="newGame.registerDueDate ?? new Date()"></VueDatePicker>
+              <VueDatePicker id="gs-date-picker" v-model="newGame.gameStart" :min-date="newGame.regDueDate ?? new Date()"></VueDatePicker>
             </GmFormField>
           </v-col>
           <v-col
@@ -79,7 +79,7 @@
               :error-message="v$.newGame.gameEnd.$errors[0]?.$message"
             >
               <label for="ge-date-picker">Game End Time*</label>
-              <VueDatePicker id="ge-date-picker" v-model="newGame.gameEnd" :min-date="newGame.gameStart ?? newGame.registerDueDate ?? new Date()"></VueDatePicker>
+              <VueDatePicker id="ge-date-picker" v-model="newGame.gameEnd" :min-date="newGame.gameStart ?? newGame.regDueDate ?? new Date()"></VueDatePicker>
             </GmFormField>
           </v-col>
           <v-col cols="12">
@@ -116,10 +116,10 @@
       {{ v$.newGame.name.$errors }}
     </div>
     <div>
-      {{ typeof newGame.registerDueDate }}
+      {{ typeof newGame.regDueDate }}
     </div>
     <div>
-      {{ v$.newGame.registerDueDate.$error }}
+      {{ v$.newGame.regDueDate.$error }}
     </div>
   </div>
 </template>
@@ -154,9 +154,9 @@ export default defineComponent({
     newGame: {
       name: { $autoDirty: true, required },
       price: { $autoDirty: true, minValue: minValue(0) },
-      spots: { $autoDirty: true, minValue: minValue(0), required, integer },
+      capacity: { $autoDirty: true, minValue: minValue(0), required, integer },
       location: { $autoDirty: true, required },
-      registerDueDate: { $autoDirty: true, required, mustBeFutureDate },
+      regDueDate: { $autoDirty: true, required, mustBeFutureDate },
       gameStart: { $autoDirty: true, required, mustBeFutureDate },
       gameEnd: { $autoDirty: true, required, mustBeFutureDate },
     }

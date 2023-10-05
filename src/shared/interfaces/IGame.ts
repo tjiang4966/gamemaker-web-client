@@ -7,12 +7,12 @@ export interface IGame {
   createdDate: Date;
   gameStart: Date;
   gameEnd: Date;
-  registerDueDate: Date;
+  regDueDate: Date;
   status: string;
   deleted: number;
   price: number;
   location: string;
-  spots: number;
+  capacity: number;
   createdUser: IUser;
   gameHasUser: IGameHasUser[];
 }

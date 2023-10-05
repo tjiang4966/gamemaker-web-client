@@ -1,5 +1,11 @@
 <template>
-  <div class="pa-2">
+  <div class="pa-2 w-100">
+    <div class="mb-2 d-flex flex-row justify-space-between">
+      <div>Filters</div>
+      <div>
+        <GmPartialModalCreateGame @created="init"/>
+      </div>
+    </div>
     <div v-if="gameStore.list" class="d-flex justify-start">
       <v-row>
         <v-col
@@ -21,11 +27,13 @@ import { defineComponent } from 'vue';
 import { mapStores } from 'pinia';
 import { gameStore } from '@/stores/game';
 import GmPartialGameCard from '@/components/GmPartialGameCard.vue';
+import GmPartialModalCreateGame from '@/components/GmPartialModalCreateGame.vue';
 import dayjs from 'dayjs';
 
 export default defineComponent({
   components: {
-    GmPartialGameCard
+    GmPartialGameCard,
+    GmPartialModalCreateGame,
   },
   data: () => ({
     isLoading: false as boolean,

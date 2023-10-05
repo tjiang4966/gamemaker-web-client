@@ -29,5 +29,9 @@ export const gameStore = defineStore('game', {
         this.list = result.data;
       }
     },
+    async createGame(payload: Partial<IGame>) {
+        const result = await apiRequest.post<any, any, Partial<IGame>>('/games', payload);
+        return result;
+    },
   }
 })
