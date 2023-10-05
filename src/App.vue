@@ -28,9 +28,9 @@ export default defineComponent({
   computed: {
     ...mapStores(userStore),
   },
-  // mounted() {
-  //   this.userStore.getCurrentUser();
-  // },
+  mounted() {
+    this.userStore.getCurrentUser();
+  },
   methods: {
     toggleNavigation() {
       console.log('toggle nav');

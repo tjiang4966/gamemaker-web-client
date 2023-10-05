@@ -7,5 +7,6 @@ export interface IUser {
   games: IGame;
   googleId: string;
   provider: string;
+  profilePhoto: string;
   gameHasUser: IGameHasUser[];
 }

@@ -47,8 +47,4 @@ app.use(router)
 app.use(vuetify)
 app.component('VueDatePicker', VueDatePicker);
 
-app.config.globalProperties.$GmGlobals = {
-  currentUser: {} as IUser,
-};
-
 app.mount('#gmApp')

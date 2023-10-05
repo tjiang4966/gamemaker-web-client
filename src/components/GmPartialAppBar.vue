@@ -12,8 +12,11 @@
     <v-app-bar-title>Gamemaker</v-app-bar-title>
 
     <template #append>
-      <v-avatar density="compact" color="surface-variant"></v-avatar>
-        <v-menu>
+      <v-avatar density="compact" color="surface-variant">
+          <v-img v-if="userStore.currentUser.profilePhoto" :src="userStore.currentUser.profilePhoto"></v-img>
+          <v-icon v-else icon="mdi-account-circle-outline" class="text-h4"></v-icon>
+      </v-avatar>
+      <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn 
             v-bind="props"
@@ -28,20 +31,23 @@
           <v-list-item>
             Logout
           </v-list-item>
-        </v-list>
+        </v-list> 
       </v-menu>
     </template>
   </v-app-bar>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { userStore } from '@/stores/user';
 import GmPartialGoogleLoginButton from './GmPartialGoogleLoginButton.vue';
+import { mapStores } from 'pinia';
 
 export default defineComponent({
   components: {
     GmPartialGoogleLoginButton
   },
   computed: {
+    ...mapStores(userStore),
     hideMenuBtn() {
       return this.$vuetify.display.lgAndUp;
     }
