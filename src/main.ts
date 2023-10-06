@@ -29,7 +29,6 @@ import '@formkit/themes/genesis'
 // formkit rules
 import { integer } from '@/shared/helpers/formkitRuls'
 
-
 const vuetify = createVuetify({
   components: {
     ...components,

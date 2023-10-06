@@ -22,7 +22,10 @@
           type="form"
           @submit="onFormSubmit"
           :actions="false"
+          #default="{ value }"
         >
+        {{ dayjs((value?.gameDate ?? '2001-01-01') + '' + value?.endTime).format('YYYY-MM-DD HH:mm') }}
+        {{ dayjs((value?.gameDate ?? '2001-01-01') + '' + value?.startTime).format('YYYY-MM-DD HH:mm') }}
           <v-row>
             <v-col :cols="12" :sm="12" :md="6" :lg="4">
               <FormKit
@@ -31,6 +34,7 @@
                 type="text"
                 label="Game Name"
                 name="name"
+                prefix-icon="bookmark"
                 validation="required"
               />
             </v-col>
@@ -38,7 +42,7 @@
               <FormKit
                 type="number"
                 number
-                prefixIcon="dollar"
+                prefix-icon="dollar"
                 label="Registration Fee"
                 name="price"
                 validation="required | min: 0"
@@ -50,7 +54,7 @@
               <FormKit
                 type="number"
                 number
-                prefixIcon="people"
+                prefix-icon="people"
                 label="Capacity"
                 name="capacity"
                 validation="required | min: 1 | integer"
@@ -68,7 +72,12 @@
                 type="date"
                 label="Game Date"
                 name="gameDate"
+                prefix-icon="date"
                 :value="dayjs().add(7, 'days').startOf('day').format('YYYY-MM-DD')"
+                :validation="`required | date_after: ${dayjs(value?.regDueDate as string).format('YYYY-MM-DD')}`"
+                :validation-messages="{
+                  date_after: 'Game date must be after registration due date.'
+                }"
               />
             </v-col>
             <v-col :cols="12" :sm="6" :md="3" :lg="4">
@@ -76,7 +85,9 @@
                 type="time"
                 label="Start Time"
                 name="startTime"
+                prefix-icon="time"
                 value="18:00"
+                validation="required"
               />
             </v-col>
             <v-col :cols="12" :sm="6" :md="3" :lg="4">
@@ -84,7 +95,9 @@
                 type="time"
                 label="End Time"
                 name="endTime"
+                prefix-icon="time"
                 value="20:00"
+                validation="required"
               />
             </v-col>
           </v-row>
@@ -93,8 +106,13 @@
               <FormKit
                 type="datetime-local"
                 label="Registration Stops On"
-                name="regDue"
+                name="regDueDate"
+                prefix-icon="datetime"
                 :value="dayjs().add(5, 'days').startOf('day').set('hour', 22).format('YYYY-MM-DD HH:mm')"
+                :validation="`required | date_after: ${dayjs().format('YYYY-MM-DD HH:mm')}`"
+                :validation-messages="{
+                  date_after: 'Registration due date must be a future date.'
+                }"
                />
             </v-col>
           </v-row>
@@ -104,6 +122,7 @@
                 type="text"
                 label="Location*"
                 name="location"
+                :prefix-icon="mapMarkerOutlined"
                 validation="required"
               />
             </v-col>
@@ -138,6 +157,7 @@ import localizaedFormat from 'dayjs/plugin/localizedFormat';
 import { ref, computed } from 'vue';
 import type { Ref } from 'vue';
 import { gameStore } from '@/stores/game';
+import { mapMarkerOutlined } from '@/assets/svgIcons';
 
 dayjs.extend(localizaedFormat);
 
@@ -180,11 +200,17 @@ function onSaveBtnClick() {
   node.submit();
 };
 
-async function onFormSubmit(data: INewGameData) {
+async function onFormSubmit(data: INewGameData, node: any) {
   // return if data is invalid
   if (!gameFormRef.value.node.context.state.valid) {
     return;
   }
+  if (dayjs(`${data.gameDate} ${data.startTime}`).isAfter(dayjs(`${data.gameDate} ${data.endTime}`))) {
+    console.log('start is after end!');
+    node.setErrors(['Game start time is earlier than end time!']);
+    return;
+  }
+
   // compose game object
   const newGame: Partial<IGame> = {
     name: data.name,

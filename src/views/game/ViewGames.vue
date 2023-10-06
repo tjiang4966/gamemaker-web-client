@@ -40,6 +40,7 @@ export default defineComponent({
     orderBy: 'status' as string,
     direction: 'asc' as 'asc' | 'desc',
     dayjs,
+    showSnack: false,
   }),
   computed: {
     ...mapStores(gameStore),
